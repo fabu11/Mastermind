@@ -24,7 +24,7 @@ void App::input(){
         running = false;
         break;
       case SDL_KEYDOWN:
-        if(e.key.keysym.sym == SDLK_ESCAPE)
+        if(e.key.keysym.sym == SDLK_ESCAPE && !show_rules)
           show_pause = !show_pause;
         if(e.key.keysym.sym == SDLK_F11)
           fullscreen = !fullscreen;
@@ -67,7 +67,7 @@ void App::update(){
     if(show_rules){
       ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f), ImGuiCond_Always, ImVec2(0.5f,0.5f));
       ImGui::SetNextWindowSize(ImVec2(io.DisplaySize.x * 0.8f, io.DisplaySize.y*0.6f), ImGuiCond_Always);
-      ImGui::Begin("Settings > Rules", &show_rules, window_flags);
+      ImGui::Begin("Settings > Rules", nullptr, window_flags);
       ImGui::Text("adasfkajsdlfasdfasdfsadfasdfsdfaf\nasdfasdfasdfasdfasdf\nadsfadsf\n\ndasfasdfadsfasdfasdffsfasdf");
       if(ImGui::Button("Close")){
         show_rules = false;
@@ -77,7 +77,6 @@ void App::update(){
     ImGui::ColorEdit3("Background Color", (float*)&clear_color);
     ImGui::End();
   }
-
   if(show_demo){
     ImGui::ShowDemoWindow();
   }
